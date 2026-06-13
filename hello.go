@@ -149,8 +149,37 @@ func Palinom() {
 	}
 }
 
-func main() {
-	words := "##Fourth Message@@@"
+func loops() {
+	//Классический цикл for (C - подобный синтаксис)
+	for i := 0; i < 5; i++ {
+		fmt.Println(i)
+	}
+
+	//Аналог while
+
+	isInfinity := true
+
+	for isInfinity {
+		//Логика выполнения
+		isInfinity = false
+	}
+
+	//Бесконечный цикл
+	for {
+		fmt.Println("Work work work")
+		break
+	}
+
+	//for range (Для обхода коллекций)
+	arr := []string{"Go", "Python", "Java"}
+
+	for _, val := range arr {
+		fmt.Println(val)
+	} // где i - индекс, val - значение элемента
+}
+
+func lessonsOne() {
+	words := "##Fourth Message"
 
 	words = strings.TrimPrefix(words, "##")
 
@@ -159,4 +188,47 @@ func main() {
 	}
 
 	fmt.Println(words)
+}
+
+func main() {
+	// countRates := 6
+
+	// arr := [...]int{0, 0, 6, 0, 9, 8}
+
+	// left := 0
+
+	// right := 0
+
+	// for left < countRates {
+	// 	if arr[left] > 0 {
+	// 		arr[right] = arr[left]
+	// 		arr[left] = 0
+	// 		right++
+	// 	}
+	// 	left++
+	// }
+
+	// fmt.Println(arr)
+
+	countRates := 7
+
+	arr := [7]int{1, 2, -1, 4, 5, -1, 6}
+
+	elements := -1
+
+	left := 0
+
+	right := 0
+
+	for left < countRates {
+		if arr[left] != elements {
+			arr[right] = arr[left]
+			right++
+		}
+		left++
+	}
+
+	arr2 := arr[:right]
+
+	fmt.Println(arr2)
 }
