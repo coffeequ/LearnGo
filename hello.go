@@ -3,6 +3,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"strings"
 ) //Подключаем функциональность пакета fmt
 
@@ -190,7 +191,7 @@ func lessonsOne() {
 	fmt.Println(words)
 }
 
-func main() {
+func arrayLessons1312() {
 	// countRates := 6
 
 	// arr := [...]int{0, 0, 6, 0, 9, 8}
@@ -231,4 +232,221 @@ func main() {
 	arr2 := arr[:right]
 
 	fmt.Println(arr2)
+}
+
+func FindMaxVal() {
+	lenArr := 5
+
+	arr := [5]int{95, 87, 100, 92, 85}
+
+	maxVal := arr[0]
+
+	for i := 1; i < lenArr; i++ {
+		if maxVal < arr[i] {
+			maxVal = arr[i]
+		}
+	}
+
+	fmt.Println(maxVal)
+}
+
+func findDuoValue() {
+	lenArr := 4
+	arr := [4]int{1, 3, 4, 11}
+
+	val := 0
+
+	indxOne := 0
+
+	indxTwo := 1
+
+	minVal := int(math.Abs(float64(arr[indxOne] - arr[indxTwo])))
+
+	for i := 1; i < lenArr-1; i++ {
+
+		val = int(math.Abs(float64(arr[i] - arr[i+1])))
+
+		if val < minVal {
+			indxOne = i
+			indxTwo = i + 1
+		}
+	}
+	fmt.Println(arr[indxOne], arr[indxTwo])
+}
+
+func lastEntryVal() {
+	//Реализация через стек
+	countContains := 9
+
+	arr := [9]int{7, 3, 4, 1, 10, 11, 12, 19, 21}
+
+	stack := []int{}
+
+	for i := 0; i < countContains; i++ {
+		if arr[i]%2 == 0 {
+			stack = append(stack, arr[i])
+		}
+	}
+
+	if len(stack) == 0 {
+		fmt.Println(-1)
+	} else {
+		fmt.Println(stack[len(stack)-1])
+	}
+
+	//Реализация без стека
+
+	lastVal := -1
+	for i := 0; i < countContains; i++ {
+		if arr[i]%2 == 0 {
+			lastVal = arr[i]
+		}
+	}
+	fmt.Println(lastVal)
+}
+
+func SearchFirstIncludeValue() {
+	lenArr := 5
+	arr := [5]int{5, 7, 9, 11, 13}
+	target := 20
+
+	left := 0
+	//Для lower_bound правая граница должна быть за последним элементом
+	right := lenArr
+
+	for left < right {
+		middle := (left + right) / 2
+
+		if arr[middle] < target {
+			left = middle + 1
+		} else {
+			right = middle
+		}
+	}
+	fmt.Println("Target:", left)
+}
+
+func maxInt(valOne int, valTwo int) (res int) {
+	if valOne > valTwo {
+		return valOne
+	} else {
+		return valTwo
+	}
+}
+
+func PetyaDevDiplom() {
+	arrX := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
+
+	height := 2
+
+	weight := 3
+
+	countN := 6
+
+	left := maxInt(height, weight)
+
+	right := left * countN
+
+	for left+1 < right {
+		middle := (left + right) / 2
+
+		plane := (arrX[middle] / height) * (arrX[middle] / weight)
+
+		if plane >= countN {
+			right = middle
+		} else {
+			left = middle
+		}
+	}
+
+	fmt.Println(right)
+}
+
+func ternarnAndExponenc() {
+	//len := 11
+
+	arr := []int{8, 11, 12, 16, 18, 21, 33, 36, 48, 54, 63}
+
+	target := 16
+
+	border := 1
+
+	lastEl := len(arr) - 1
+
+	//Для хранения старого значения border => он же будет являться и левым указателем при бинарном поиске
+	prev := 0
+
+	//Экспоненциальный поиск
+	for border < lastEl && arr[border] < target {
+		prev = border
+		border *= 2
+
+		if border > lastEl {
+			border = lastEl
+		}
+	}
+
+	//Бинарный поиск
+	left := prev
+
+	right := border
+
+	for left <= right {
+		middle := (left + right) / 2
+
+		if arr[middle] < target {
+			left = middle + 1
+		} else {
+			right = middle - 1
+		}
+	}
+	fmt.Println(left, right)
+}
+
+func SelectionSort(arr []int) []int {
+
+	lenArr := len(arr)
+
+	for i := 0; i < lenArr-1; i++ {
+		for j := i + 1; j < lenArr; j++ {
+			if arr[i] > arr[j] {
+				arr[i], arr[j] = arr[j], arr[i]
+			}
+		}
+	}
+	return arr
+}
+
+func InsertSort(arr []int) []int {
+	count := len(arr)
+	for i := 1; i < count; i++ {
+		j := i
+		for j > 0 {
+			if arr[j-1] > arr[j] {
+				arr[j-1], arr[j] = arr[j], arr[j-1]
+			}
+			j--
+		}
+	}
+	return arr
+}
+
+func SelectionSortRepit(arr []int) []int {
+
+	lenArr := len(arr)
+
+	for i := 0; i < lenArr-1; i++ {
+		for j := i + 1; j < lenArr; j++ {
+			if arr[i] > arr[j] {
+				arr[i], arr[j] = arr[j], arr[i]
+			}
+		}
+	}
+	return arr
+}
+
+func main() {
+	arr := []int{5, 4, 1, 2, 10, 100, 21, 33, 2, 10, 100, 21, 33, 2, 10, 100, 21, 33, 2, 10, 100, 21, 33}
+	resArr := SelectionSortRepit(arr)
+	fmt.Println(resArr)
 }
